@@ -20,7 +20,7 @@ system looks up the name in password file, usually: /etc/passwd
 
 login-name:x-denotes-space-for-encrypted-password:numeric-user-ID:numeric-group-ID:comment:home-directory:default-shell
 
-ex: sar\:x:205:105:Nick Moore:/home/nick:/bin/bash
+ex: sar\:x\:205:105:Nick Moore:/home/nick:/bin/bash
 
 encrypted passwords are in a different file now, hence the x
 
