@@ -39,20 +39,29 @@ common shells:
 ===
 / is top of file tree, everything is a file
 
-directory:
+*directory:*
     file that contains directory entries
     
-directory entry:
+*directory entry:*
     has a filename and a structure of info describing the file attributes
     
-file attributes:
-    type of file: [regular, directory]
-    filesize
-    file owner
-    file permissions
-    file's last modification time
+*file attributes:*
+- type of file: [regular, directory]
+- filesize
+- file owner
+- file permissions
+- file's last modification time
     
-functions that return file attributes of a file:
-    stat, fstat
+*functions that return file attributes of a file:*
+- stat, fstat
     
-/    
+filename
+---
+- disallowed characters: / and ' '
+- every directory includes filenames . and .. (current directory and parent directory)
+
+Pathname
+---
+- absolute paths -- begin with /
+- relative paths -- begin with directory name other than /
+
