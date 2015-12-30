@@ -9,7 +9,7 @@ This is the kernel (small and at the center). Software interacts with the kernel
 
 The shell provides an interface for running other applications.
 
-3. Loggin in
+3. Logging in
 ===
 Enter your login name, then your password
 system looks up the name in password file, usually: /etc/passwd
@@ -19,7 +19,8 @@ system looks up the name in password file, usually: /etc/passwd
 7 fields delimited by :
 
 login-name:x-denotes-space-for-encrypted-password:numeric-user-ID:numeric-group-ID:comment:home-directory:default-shell
-ex: sar:x:205:105:Nick Moore:/home/nick:/bin/bash
+
+ex: sar\:x:205:105:Nick Moore:/home/nick:/bin/bash
 
 encrypted passwords are in a different file now, hence the x
 
