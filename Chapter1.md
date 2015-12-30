@@ -40,20 +40,20 @@ common shells:
 ===
 / is top of file tree, everything is a file
 
-*directory:*
+**directory:**
     file that contains directory entries
     
-*directory entry:*
+**directory entry:**
     has a filename and a structure of info describing the file attributes
     
-*file attributes:*
+**file attributes:**
 - type of file: [regular, directory]
 - filesize
 - file owner
 - file permissions
 - file's last modification time
     
-*functions that return file attributes of a file:*
+**functions that return file attributes of a file:**
 - stat, fstat
     
 filename
