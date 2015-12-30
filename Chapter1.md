@@ -66,3 +66,38 @@ Pathname
 - absolute paths -- begin with /
 - relative paths -- begin with directory name other than /
 
+Working Directory
+---
+- every process has one
+- all relative pathnames are based on this
+- use * **chdir** *function to change working directory
+
+Home Directory
+---
+- working directory is set to this on login
+- home directory is pulled from the user's entry in /etc/passwd
+
+5. Input and Output
+===
+File Descriptors
+---
+- non-negative integers
+- usually small
+- kernel uses them to identify the files being accessed by a particular process
+- whenever it opens an existing file or creates a new one, the kernel returns a file descriptor we use when we read or write the file
+
+Standard Input, Output, and Error
+---
+- these are file descriptors, and all shells open all three whenever a new program is run
+- all three are by default connected to terminal
+- can be redirected to a different stream
+
+Unbuffered IO
+---
+**provided by the following functions, which all work with file descriptors:**
+- open
+- read
+- write
+- lseek
+- close
+
