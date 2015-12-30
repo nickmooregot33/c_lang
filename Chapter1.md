@@ -4,19 +4,20 @@ typical stuff.  OSes provided services, like opening files, executing programs, 
 
 2. Unix Architecture
 ===
-OS controls the hardware, and provides environment where programs can run.
-This is the kernel (small and at the center). Software interacts with the kernel with system calls.  Libraries are built on top of system calls, but we don't need to use libraries.
+- OS controls the hardware, and provides environment where programs can run.
+- This is the kernel (small and at the center). Software interacts with the kernel with system calls.  
+- Libraries are built on top of system calls, but we don't need to use libraries
 
-The shell provides an interface for running other applications.
+- The shell provides an interface for running other applications.
 
 3. Logging in
 ===
-Enter your login name, then your password
-system looks up the name in password file, usually: /etc/passwd
+- Enter your login name, then your password
+- system looks up the name in password file, usually: /etc/passwd
 
 /etc/passwd
 ---
-7 fields delimited by :
+- 7 fields delimited by :
 
 login-name:x-denotes-space-for-encrypted-password:numeric-user-ID:numeric-group-ID:comment:home-directory:default-shell
 
@@ -27,13 +28,13 @@ encrypted passwords are in a different file now, hence the x
 Shells
 ---
 common shells:
-  Bourne:               sh
-  Bourne-again-shell:   bash
-  C shell:              csh
-  Korn shell:           ksh
-  TENEX C shell:        tcsh
+- Bourne:               sh
+- Bourne-again-shell:   bash
+- C shell:              csh
+- Korn shell:           ksh
+- TENEX C shell:        tcsh
   
-  in linux, sh and csh link to bash and tcsh respectively
+- in linux, sh and csh link to bash and tcsh respectively
   
 4. Files and Directories
 ===
