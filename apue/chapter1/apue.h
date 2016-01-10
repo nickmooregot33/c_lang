@@ -114,13 +114,13 @@ void err_quit(const char*,...) __attribute__((noreturn));
 void err_cont(int,const char*,...);
 void err_exit(int,const char*,...) __attribute__((noreturn));
 void err_ret(const char*,...);
-void err_sys(const char*,...) ___attribute__((noreturn));
+void err_sys(const char*,...) __attribute__((noreturn));
 
 void log_msg(const char*,...);					/*Appendix B*/
 void log_open(const char*, int, int);
 void log_quit(const char*,...) __attribute__((noreturn));
 void log_ret(const char*,...);
-void log_sys(const char*,...); __attribute__((noreturn));
+void log_sys(const char*,...) __attribute__((noreturn));
 void log_exit(int,const char*,...) __attribute__((noreturn));
 
 void TELL_WAIT(void);						/*parent/child from Section 8.9*/
