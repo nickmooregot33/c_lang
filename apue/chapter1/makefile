@@ -10,13 +10,16 @@ cp.2: apue.h cp.2.o $(OBJECTS)
 	gcc -o cp.2 cp.2.o stderr.o logerr.o
 pid: apue.h pid.o
 	cc -o pid pid.o
+shell: apue.h shell.o stderr.o logerr.o
+	cc -o shell shell.o stderr.o logerr.o
 
 ls.o: apue.h 
 cp.o: apue.h
 stderr.o: apue.h 
 logerr.o: apue.h 
 pid.o: apue.h
+shell.o: apue.h
 
 .PHONY: clean
 clean: 
-	rm ls cp cp.2 ls.o cp.o cp.2.o $(OBJECTS)
+	rm ls cp cp.2 ls.o cp.o cp.2.o shell shell.o  $(OBJECTS)
