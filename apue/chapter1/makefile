@@ -28,4 +28,4 @@ uid: apue.h
 
 .PHONY: clean
 clean: 
-	rm ls cp error cp.2 ls.o cp.o cp.2.o shell shell.o error.o uid uid.o $(OBJECTS)
+	rm ls cp error cp.2 ls.o cp.o cp.2.o shell shell.o error.o uid uid.o pid pid.o $(OBJECTS)
