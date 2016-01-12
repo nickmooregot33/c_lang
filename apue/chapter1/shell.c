@@ -1,6 +1,8 @@
 #include "apue.h"
 #include <sys/wait.h>
 
+static void sig_int(int);				/*our signal-catching function*/
+
 int log_to_stderr = 1;
 
 int main(void){
@@ -8,6 +10,9 @@ int main(void){
 	pid_t pid;
 	int status;
 
+	if(signal(SIGINT, sig_int) == SIG_ERR)
+		err_sys("signal error");
+		
 	printf("%% ");					/*print pfompt (printf requires %% to print %)*/
 	while(fgets(buf,MAXLINE, stdin)!=NULL){
 		if(buf[strlen(buf)-1] == '\n')
@@ -28,4 +33,8 @@ int main(void){
 	}
 	exit(0);
 }
-			
+		
+void sig_int(int signo){
+	printf("interrupt\n%% ");
+}
+	
