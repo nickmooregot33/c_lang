@@ -84,5 +84,6 @@ Chapter 3
             off_t currpos;
             currpos = lseek(fd, 0, SEEK_CUR);
 ```
-      
+    - setting the file offset past the end of the file just means the file will be extended on the next write
+      - stuff  
  
