@@ -78,13 +78,40 @@ Chapter 3
       - whence == SEEK_END `=>` the file's offset is set to the size of the file plus *offset*
       - *offset* can be positive or negative but the file offset must be positive for regular files
         - because certain devices may allow negative file offset, testing for failure must explicitly use -1 instead of `test <0`
-    - we can seek 0 bytes from the current position to get the current file offset, or see if the file is capable of seeking
-      - if the descriptor refers to a pipe, FIFO, or socket, errno is set to ESPIPE and returns -1
-        ```
-            off_t currpos;
-            currpos = lseek(fd, 0, SEEK_CUR);
-        ```
-    - setting the file offset past the end of the file just means the file will be extended on the next write
-      - known as creating a hole in the file
-      - hole in a file is not required to have storage for the empty bytes on disk, so different file system implementations will have different behavior
+  - we can seek 0 bytes from the current position to get the current file offset, or see if the file is capable of seeking
+    - if the descriptor refers to a pipe, FIFO, or socket, errno is set to ESPIPE and returns -1
+      ```
+          off_t currpos;
+          currpos = lseek(fd, 0, SEEK_CUR);
+      ```
+  - setting the file offset past the end of the file just means the file will be extended on the next write
+    - known as creating a hole in the file
+    - hole in a file is not required to have storage for the empty bytes on disk, so different file system implementations will have different behavior
+  - implementations are allowed to support whatever size off_t they want
+    - find the implementation with the sysconf() function
+      - _SC_V7_ILP32_OFF32 `=>` int, long, pointer, and off_t are all 32 bits
+      - _SC_V7_ILP32_OFFBIG `=>` int, long, and pointer types are 32 bits; off_t types are ate least 64 bits
+      - _SC_V7_LP64_OFF64  `=>` int types are 32 bits; long, pointer and aff_t types are 64 bits
+      - _SC_V7_LP64-OFFBIG `=>` int tpes are at least 32 bits; long, pointer, and off_t types are at least 64 bits
+    
+- 3.7 read Function
+  - ssize_t read(int fd, void* buf, size_t nbytes);
+    - returns number of bytes read, 0 on EOF, and -1 on error
+    - `#include <unistd.h>`
+    - read data from an open file with read()
+  - cases in which the number of bytes actually read is less than the amount requested
+    - EOF is reached in a regular file before the requested number of bytes was read
+    - when reading from a terminal device, normally up to 1 line is read at a time //see chapter 18
+    - when reading from a network, buffering within the network may cause less than the requested amount to be returned
+    - reading from a pipe or FIFO.  if the pipe contains fewer bytes than requested, read will return what is available
+    - reading from a record-oriented device. some can return up to a single record at a time
+    - when interrupted by a signal and a partial amount of data has already been read // see section 10.5
+  - read starts at the file's current offset.  before it returns, the offset is incremented by the number of bytes read
+  - old function prototype: `int read(int fd, char* buf, unsigned nbytes);`
+
+- 3.8 write Function
+  - `ssize_t write(int fd, const void* buf, size_t nbytes)'`
+  - `#include<unistd.h>`
+  - 
+    
  
