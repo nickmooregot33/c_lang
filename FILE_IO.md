@@ -11,15 +11,15 @@ Chapter 3
 - File Descriptors
   - kernel refers to all open files by file descriptors (non-negative integer)
   - file descriptor 0 => standard input (use STDIN_FILENO) defined in `<unistd.h>`
-  - file descriptor 1 => standard output (use STDOUT_FILENO) defined in /<unistd.h/>
-  - file descriptor 2 => standard error (use STDERR_FILENO) defined in /<unistd.h/>
-  - file descriptors range from 0 to OPEN_MAX-1, use sysconf(_SC_OPEN_MAX) from /<unistd.h/> to find this value
+  - file descriptor 1 => standard output (use STDOUT_FILENO) defined in `<unistd.h>`
+  - file descriptor 2 => standard error (use STDERR_FILENO) defined in `<unistd.h>`
+  - file descriptors range from 0 to OPEN_MAX-1, use sysconf(_SC_OPEN_MAX) from `<unistd.h>` to find this value
     - see 2.5.4 for more info
   - getting new file descriptors (always the lowest-numbered unused file descriptor)
     - int open(const char* path, int oflag) or int open(const char* path, int oflag, mode_t mode) 
-      - defined in /<fcntl.h/>
+      - defined in `<fcntl.h>`
     - int openat(int dirfd, const char* path, int oflag) or int openat(int dirfd, const char* path, int oflag, mode_t mode)
-      - also defined in /<fcntl.h/>
+      - also defined in `<fcntl.h>`
       - dirfd is a file descriptor of a specific directory to use as the beginning of a relative path.  If it's 'AT_FDCWD' or path is absolute then the absolute path is used or the current working directory is used as the directory
       - Useful in avoiding time-of-check-to-time-of-use errors (TOCTTOU)
     - options specified by oflag are ORed together:
