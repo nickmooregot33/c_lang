@@ -76,7 +76,8 @@ Chapter 3
       - whence == SEEK_SET `=>` the file's offset is set to *offset* bytes from the beginning of te file
       - whence == SEEK_CUR `=>` the file's offset is set to it's current value plus *offset*
       - whence == SEEK_END `=>` the file's offset is set to the size of the file plus *offset*
-      - *offset* can be positive or negative
+      - *offset* can be positive or negative but the file offset must be positive for regular files
+        - because certain devices may allow negative file offset, testing for failure must explicitly use -1 instead of `test <0`
     - we can seek 0 bytes from the current position to get the current file offset, or see if the file is capable of seeking
       - if the descriptor refers to a pipe, FIFO, or socket, errno is set to ESPIPE and returns -1
 ```
