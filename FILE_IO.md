@@ -78,6 +78,9 @@ Chapter 3
       - whence == SEEK_END `=>` the file's offset is set to the size of the file plus *offset*
       - *offset* can be positive or negative
     - we can seek 0 bytes from the current position to get the current file offset
-    - `off_t currpos;
-    - currpos = lseek(fd, 0, SEEK_CUR);`
+```
+off_t currpos;
+currpos = lseek(fd, 0, SEEK_CUR);
+```
+
  
