@@ -3,19 +3,20 @@ Advanced programming in the Unix Environment
 
 Chapter 3
 ---
-- Introduction
+- 3.1 Introduction
   - most IO with files can be done with just open(), read(), write(), lseek(), and close()
   - this chapter is for *unbuffered* io
   - also covers dup(), fcntl(), sync(), fsync(), and ioctl() 
 
-- File Descriptors
+- 3.2 File Descriptors
   - kernel refers to all open files by file descriptors (non-negative integer)
   - file descriptor 0 => standard input (use STDIN_FILENO) defined in `<unistd.h>`
   - file descriptor 1 => standard output (use STDOUT_FILENO) defined in `<unistd.h>`
   - file descriptor 2 => standard error (use STDERR_FILENO) defined in `<unistd.h>`
   - file descriptors range from 0 to OPEN_MAX-1, use sysconf(_SC_OPEN_MAX) from `<unistd.h>` to find this value
     - see 2.5.4 for more info
-- getting new file descriptors (always the lowest-numbered unused file descriptor)
+
+- 3.3 getting new file descriptors (always the lowest-numbered unused file descriptor)
   - int open(const char* path, int oflag) or int open(const char* path, int oflag, mode_t mode) 
     - defined in `<fcntl.h>`
   - int openat(int dirfd, const char* path, int oflag) or int openat(int dirfd, const char* path, int oflag, mode_t mode)
@@ -52,6 +53,7 @@ Chapter 3
     - use long fpathconf(int fd, _PC_NAME_MAX) or long pathconf(const char* pathname, _PC_NAME_MAX) to get the maximum length of the a filename, not including null terminator
     - use long fpathconf(int fd, _POSIX_NO_TRUNC) or long pathconf(const char* pathname, _POSIX_NO_TRUNC) to see whether long pathnames are silently truncated or an error is thrown for a certain directory
       - if _POSIX_NO_TRUNC is in effect, errno is set to ENAMETOOLONG and an error is returned if any filename componeent of the pathname exceeds NAME_MAX
+
 - 3.4 creat Function
   -   
  
