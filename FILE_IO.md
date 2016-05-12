@@ -73,5 +73,11 @@ Chapter 3
   - off_t lseek(int fd, off_t offset, int whence); //defined in `<unistd.h>`
     - set's the file's offset
     - what is done with *offset* depends on *whence*
-      - whence == SEEK_SET `=>` 
+      - whence == SEEK_SET `=>` the file's offset is set to *offset* bytes from the beginning of te file
+      - whence == SEEK_CUR `=>` the file's offset is set to it's current value plus *offset*
+      - whence == SEEK_END `=>` the file's offset is set to the size of the file plus *offset*
+      - *offset* can be positive or negative
+    - we can seek 0 bytes from the current position to get the current file offset
+    - `off_t currpos;
+    - currpos = lseek(fd, 0, SEEK_CUR);`
  
