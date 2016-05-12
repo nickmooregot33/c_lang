@@ -85,5 +85,6 @@ Chapter 3
             currpos = lseek(fd, 0, SEEK_CUR);
         ```
     - setting the file offset past the end of the file just means the file will be extended on the next write
-      - stuff  
+      - known as creating a hole in the file
+      - hole in a file is not required to have storage for the empty bytes on disk, so different file system implementations will have different behavior
  
