@@ -80,10 +80,10 @@ Chapter 3
         - because certain devices may allow negative file offset, testing for failure must explicitly use -1 instead of `test <0`
     - we can seek 0 bytes from the current position to get the current file offset, or see if the file is capable of seeking
       - if the descriptor refers to a pipe, FIFO, or socket, errno is set to ESPIPE and returns -1
-```
+        ```
             off_t currpos;
             currpos = lseek(fd, 0, SEEK_CUR);
-```
+        ```
     - setting the file offset past the end of the file just means the file will be extended on the next write
       - stuff  
  
