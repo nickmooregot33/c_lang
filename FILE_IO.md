@@ -79,8 +79,8 @@ Chapter 3
       - *offset* can be positive or negative
     - we can seek 0 bytes from the current position to get the current file offset
 ```
-off_t currpos;
-currpos = lseek(fd, 0, SEEK_CUR);
+        off_t currpos;
+        currpos = lseek(fd, 0, SEEK_CUR);
 ```
 
  
