@@ -10,7 +10,7 @@ Chapter 3
 
 - File Descriptors
   - kernel refers to all open files by file descriptors (non-negative integer)
-  - file descriptor 0 => standard input (use STDIN_FILENO) defined in '<unistd.h>'
+  - file descriptor 0 => standard input (use STDIN_FILENO) defined in `<unistd.h>`
   - file descriptor 1 => standard output (use STDOUT_FILENO) defined in /<unistd.h/>
   - file descriptor 2 => standard error (use STDERR_FILENO) defined in /<unistd.h/>
   - file descriptors range from 0 to OPEN_MAX-1, use sysconf(_SC_OPEN_MAX) from /<unistd.h/> to find this value
