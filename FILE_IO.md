@@ -121,8 +121,7 @@ Chapter 3
   - after a successful write, the offset is incremented by the number of bytes actually written
    
 - 3.9 IO Efficiency
-  - 
-
+  - When dealing with IO buffers use a buffer size roughly equal to the block-size used in the file system for efficiency
 
 - 3.10 File Sharing
   - 
