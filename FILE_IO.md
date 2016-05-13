@@ -173,4 +173,11 @@ Chapter 3
       - returns new file descriptor if OK (specified by fd2, which is closed if already open), -1 on error
       - if fd == fd2, dup2 returns fd2 without closing it.  
       - if fd2 != fd, FD_CLOEXEC file descriptor flag is cleared for fd2, so fd2 is left open if the process calls exec
+      - dup2() is an atomic operation, so the close() followed by the open() kind of actions all happen without interruptions
+    - returned file descriptor shares the same file table entry as the argument
+  
+  - 3.13 sync, fsync, and fdatasync Functions (for ensuring consistency of disk file with software buffer cache)
+    - `int fsync(int fd);`
+    - `int fdatasync(int fd);`
+    - `void sync(void);`
     - 
