@@ -64,6 +64,7 @@ Chapter 3
       - open(path, O_RDWR | O_CREAT | O_TRUNC, mode); //even better when we want to be able to read what we wrote
     - defined in `<fcntl.h>`
     - used to be necessary because of fewer options in the second argument but now everything can be done with open()
+
 - 3.5 close Function
   - int close(int fd); //defined in `<unistd.h>`
     - returns 0 if OK and -1 on error
@@ -147,4 +148,16 @@ Chapter 3
   - understand surprises happen when multiple processes write to the same file
 
 - 3.11 Atomic Operations
-  - 
+  - atomically read or write a file at a certain offset
+    - ssize_t pread(int fd, void *buf, size_t nbytes, off_t offset);
+      - `#include<unistd.h>`
+      - returns number of bytes read, 0 on EOF, and -1 on error
+      - does not update the current file offset
+      - there is no way to interrupt the operation (acts like a critical section consisting of lseek, write, and then lseek back to where it was)
+    - ssize_t pwrite(int fd, const void *buf, size_t nbytes, off_t offset);
+      - `#include<unistd.h>`
+      - returns number of bytes read and -1 on error
+      - does not update the current file offset
+      - there is no way to interrupt the operation (acts like a critical section consisting of lseek, write, and then lseek back to where it was)
+  - Creating a File
+    - to create a file only if it does not exist, protecting the file
