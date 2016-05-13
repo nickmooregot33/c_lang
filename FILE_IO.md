@@ -160,4 +160,17 @@ Chapter 3
       - does not update the current file offset
       - there is no way to interrupt the operation (acts like a critical section consisting of lseek, write, and then lseek back to where it was)
   - Creating a File
-    - to create a file only if it does not exist, protecting the file
+    - to create a file only if it does not exist, protecting the file that already exists:
+      - `fd = open(path, O_WRONLY | O_CREAT | O_EXCL);`
+      
+- 3.12 dup and dup2 Functions
+  - duplicate existing file descriptor
+    - `int dup(int fd);`
+      - `#include<unistd.h>`
+      - returns new file descriptor if OK (lowest numbered unused file descriptor), -1 on error
+    - `int dup2(int fd, int fd2);`
+      - `#include<unistd.h>`
+      - returns new file descriptor if OK (specified by fd2, which is closed if already open), -1 on error
+      - if fd == fd2, dup2 returns fd2 without closing it.  
+      - if fd2 != fd, FD_CLOEXEC file descriptor flag is cleared for fd2, so fd2 is left open if the process calls exec
+    - 
