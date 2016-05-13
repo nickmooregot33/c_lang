@@ -177,7 +177,44 @@ Chapter 3
     - returned file descriptor shares the same file table entry as the argument
   
   - 3.13 sync, fsync, and fdatasync Functions (for ensuring consistency of disk file with software buffer cache)
-    - `int fsync(int fd);`
-    - `int fdatasync(int fd);`
     - `void sync(void);`
-    - 
+      - normally called periodically (usually 30 second period) by a system daemon (often called 'update')
+      - queues ALL modified block buffers for writing and returns
+    - `int fsync(int fd);`
+      - refers only to a single file and waits for disk writes to complete before returning
+      - updates file attributes also
+      - returns 0 if OK, -1 on error
+    - `int fdatasync(int fd);`
+      - similar to fsync(), bu affects only data portions of a file, not the file's attributes
+      - returns 0 if OK, -1 on error
+
+- 3.14 fcntl Function
+  - `int fcntl(int fd, int cmd, ... /*int arg*/);`
+    - returns -1 on error.  values for OK depend on the value of *cmd*
+    - the third argument may be an integer or a pointer to a structure (used with records)
+    - 'cmd' affects what fcntl() does
+      - cmd == F_DUPFD or cmd == F_DUPFD_CLOEXEC: duplicate an existing descriptor
+      - cmd == F_GETFD or cmd == F_SETFD: get or set file descriptor flags
+      - cmd == F_GETFL or cmd == F_SETFL: get or set file status flags
+      - cmd == F_GETOWN or cmd == F_SETOWN: get or set asynchronous IO ownership
+      - cmd == F_GETLK or cmd == F_SETLK or cmd == F_SETLKW: get or set record locks
+    - cmd possibilities
+      - F_DUPFD
+        - Duplicate the specified file descriptor and return the new one (lowest numbered one not already in use and is greater than the third argument to the function).  The new descriptor shares the same file table entry as fd, with its own file descriptor flags.  The FD_CLOEXEC file descriptor flag is cleared.
+      - F_DUPFD_CLOEXEC
+        - Duplicate the file descriptor and set the FD_CLOEXEC file descriptor flag associated with the new descriptor.  Returns the new file descriptor
+      - F_GETFD
+        - return the file descriptor flags for *fd*.  Currently, onle one file descriptor flag is defined: **FD_CLOEXEC**
+      - F_SETFD
+        - set the file descriptor flags for *fd*.  The new flag value is set from the third argument
+      - F_GETFL
+        - return the file status flags for *fd*. These were described in section 3.3
+        - file status flags O_RDONLY, O_WRONLY, O_RDWR, O_EXEC, and O_SEARCH are mutually exclusive, and NOT 'one-hot', so to find out what was set of these, we have to use the O_ACCMODE mask to get the access-mode bits and then compare the result against any of the five values
+      - F_SETFL
+          - set the file status flags to the value of the third argument (integer).  The only flags that can be changed are O_APPEND, O_NONBLOCK, O_SYNC, O_DSYNC, O_RSYNC, O_FSYNC, and O_ASYNC.
+      - F_GETOWN
+        - get the process ID or process group ID currently receiving the SIGIO and SIGURG signals. //see section 14.5.2
+      - F_SETOWN
+        - set the process ID or process groUP ID to receive the SIGIO and SIGURG signals.  A positive *arg* specifies a process ID.  A negative *arg* implies a process group ID equal to the absolute value of *arg*.
+       
+    
