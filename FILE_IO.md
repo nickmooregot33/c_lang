@@ -221,5 +221,12 @@ Chapter 3
         - get the process ID or process group ID currently receiving the SIGIO and SIGURG signals. //see section 14.5.2
       - F_SETOWN
         - set the process ID or process groUP ID to receive the SIGIO and SIGURG signals.  A positive *arg* specifies a process ID.  A negative *arg* implies a process group ID equal to the absolute value of *arg*.
+
+- 3.15 ioctl Function
+  - catchall for IO functions
+  - `#include<unistd.h>` for System V and `#include<sys/ioctl.h>` for BSD and Linux
+  - `int ioctl(int fd, int request, ...);`
+    - returns -1 on error, something else if OK
+  - 
        
     
