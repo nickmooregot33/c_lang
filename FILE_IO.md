@@ -110,8 +110,8 @@ Chapter 3
   - old function prototype: `int read(int fd, char* buf, unsigned nbytes);`
 
 - 3.8 write Function
-  - `ssize_t write(int fd, const void* buf, size_t nbytes)'`
-  - `#include<unistd.h>`
+  - `ssize_t write(int fd, const void* buf, size_t nbytes)`
+  - `include<unistd.h>`
   - 
     
  
