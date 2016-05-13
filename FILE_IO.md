@@ -93,7 +93,8 @@ Chapter 3
       - _SC_V7_ILP32_OFFBIG `=>` int, long, and pointer types are 32 bits; off_t types are ate least 64 bits
       - _SC_V7_LP64_OFF64  `=>` int types are 32 bits; long, pointer and aff_t types are 64 bits
       - _SC_V7_LP64-OFFBIG `=>` int tpes are at least 32 bits; long, pointer, and off_t types are at least 64 bits
-    
+  - lseed only modifies the current offset pointer in the file table entry.  no IO is done
+  
 - 3.7 read Function
   - ssize_t read(int fd, void* buf, size_t nbytes);
     - returns number of bytes read, 0 on EOF, and -1 on error
@@ -124,8 +125,26 @@ Chapter 3
   - When dealing with IO buffers use a buffer size roughly equal to the block-size used in the file system for efficiency
 
 - 3.10 File Sharing
+  - This is a conceptual description.  Implementation details may differ
+  - files opened in a program are represented by 3 data structures
+    - process table entry (kernel implements the process table)
+      - holds file descriptor flags //see section 3.14
+      - holds a pointer to a file table entry
+    - open file table entry (kernel maintains an open file table for all open files)
+      - holds file status flags for the file (read, write, append, sync, nonblocking, etc)
+      - holds current file offset `=>` every process will need its own offset pointer so every process gets its own entry for this file in the open file table
+      - holds pointer to v-node table entry for the file
+    - v-node structure (linux instead uses a generic i-node structure which is very similar.  This is part of the virtual file system)
+      - holds information about the type of file and pointers to functions that operatie on the file (virtual file system stuff)
+      - for most files the v-node contains a pointer to the inode table entry for the file's inode
+      - two separate processes having the same file open will use the same v-node
+  - subtleties arising from this system
+    - after a write the current file offset is updated.  if this causes the file size to increase, the current file-size is updated in the i-node table entry
+    - if a file is opened with O_APPEND, each time a write is performed, the file offset pointer is set to the current file size from the inode table entry, which forces every write to be appended to the end of the file
+    - using lseek(fd,0,SEEK_END) causes the current file offset to be set to the current file size from the inode table entry
+  - after a fork() parent and child share a same file table entry for each open descriptor
+  - pay attention to the difference in scope for fd flags and file status flags.  file status flags are shared by all descriptors pointing to that file table entry, in case more than one descriptor is used for the same file, where fd flags are only for that file descriptor
+  - understand surprises happen when multiple processes write to the same file
+
+- 3.11 Atomic Operations
   - 
-
-
-    
- 
