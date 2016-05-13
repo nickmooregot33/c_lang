@@ -191,6 +191,11 @@ Chapter 3
 - 3.14 fcntl Function
   - `int fcntl(int fd, int cmd, ... /*int arg*/);`
     - returns -1 on error.  values for OK depend on the value of *cmd*
+    - other return values
+      - cmd = F_DUPFD: returns a new file descriptor
+      - cmd = F_GETFD: returns the file descriptor flags for *fd*
+      - cmd = F_GETFL: returns the file status flags for *fd*
+      - cmd = F_GETOWN: returns a positive process ID or a negative process group ID
     - the third argument may be an integer or a pointer to a structure (used with records)
     - 'cmd' affects what fcntl() does
       - cmd == F_DUPFD or cmd == F_DUPFD_CLOEXEC: duplicate an existing descriptor
