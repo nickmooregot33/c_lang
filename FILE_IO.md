@@ -119,6 +119,13 @@ Chapter 3
   - write operation starts at the file's current offset 
   - if O_APPEND was used, the offset is set to the end of the file before each write operation
   - after a successful write, the offset is incremented by the number of bytes actually written
+   
+- 3.9 IO Efficiency
+  - 
+
+
+- 3.10 File Sharing
+  - 
 
 
     
