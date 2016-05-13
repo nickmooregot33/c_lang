@@ -111,7 +111,15 @@ Chapter 3
 
 - 3.8 write Function
   - `ssize_t write(int fd, const void* buf, size_t nbytes)`
-  - `include<unistd.h>`
-  - 
+    - `include <unistd.h>`
+    - returns: number of bytes written if OK, -1 on error
+  - common cause for a write error
+    - exceeding file size limit for a process // see exercise 10.11
+    - filling up the disk //see section 7.11
+  - write operation starts at the file's current offset 
+  - if O_APPEND was used, the offset is set to the end of the file before each write operation
+  - after a successful write, the offset is incremented by the number of bytes actually written
+
+
     
  
