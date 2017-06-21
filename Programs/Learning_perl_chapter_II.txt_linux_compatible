@@ -1,0 +1,209 @@
+#!/usr/bin/perl
+
+#Chapter 2
+
+#Scalar Data
+########Strings and numbers both count as one piece of data
+########no integers.  All floating point double-precision
+########allowed floating point literals (uses the size of a Double in the compiler that compiled the perl machine)
+################integers, decimals, exponents (12e2, 3e-5, 3E-5)
+########################can use underscores where commas should be written (123_456_789)
+
+################octals (023=19), hexadecimal (0xAEB9), binary (0b11111111=255)
+
+########the usual operators are used (+-*/%)
+########power operator (2**3==8)
+
+#Strings
+########single quoted string literal == sequence of characters in single quotes
+################a every character stands for itself except for ' and \
+################use \\ to get a backslash, and \' for a '
+################to get a newline use \\n instead of \n
+########double quoted string literal
+################sequence of characters in double quotes
+################backslash is an escape character now
+################some variables in the string are replaced with their values
+
+########String operators
+################the period . concatenates string values, and must be explicitly used
+################lowercase x is string repetition operator ("gred" x (1+2) == "gredgredgred") (5 x 4 == '5' x 4 == 5555)
+########################right operand is truncated to the lower integer
+
+#Automatic conversion between numbers and strings
+########depends on the operator, so +-*/% takes numbers and .x takes strings
+########if a numerical operator is fed an alpha character string (no numbers) it's read as 0
+########only takes leading numbers and ignores whitespace ("12fred34" * "3" == 36)
+########dont lead the number with a 0 for automatic conversion.  if you need hex use hex() or octal use oct()
+
+#built in warnings
+########to run with warnings turned on, use -w flag
+########if you always want warnings for that program, use the -w flag in the shebang (#!/usr/bin/perl -w)
+########if you want more details with a warning, use "use diagnostics;" on the second line of the script
+################uses alot of memory is inefficient 
+################try the -M flag with diagnostics to only load the diagnostics if needed ($perl -Mdiagnostics ./my_program)
+
+#Scalar variables
+########variable is a name for a container that holds one or more values
+########scalar variable holds a single scalar value
+################begin with a $ followed by  an identifier which is alphanumeric with underscores but can't start with a digit.  
+################upper and lower cases are distinct in the identifier ($Fred != $fred)
+################always start the reference to the variable (read or write) with the $ (unlike in C and bash, and it's called a sigil in perl)
+
+#Scalar assignment
+########assignment operator is the = ($fred = 17, $barney = 'hello')
+
+########binary assignment operators
+################+=, -=, *=, /=, **=  
+################for strings ($string .= "blah")
+
+#Output with print
+########print() goes to standard out
+########can be used without (): print "The anwer is \"blah\""
+########doesn't start new line with each invocation.  needs \n to start new line.
+########print() can take a series of comma delimited values such as : print "The answer is", 6*7, ".\n";
+
+#Interpolation of Scalar Variables into strings
+########when a string literal is double quoted, it goes through variable interpolation
+################any scalar variable in the string is replaced with the variable's value
+################if the variable was never initialized, it is replaced with an empty string.
+################another name for variable interpolation is "double-quote interpolation."
+################to delimit the variable name in quotes, enclose the variable in {} ($what="steak"; print "fred ate ${what}s."; [fred ate steaks.])
+
+#Operator Precedence and Associativity
+########usual mathematical precedence
+########inside the parantheses is higher precedence
+########read the perlop manpage for precedence of other operators           
+########use parentheses when you aren't sure of the order
+########same precedence and associativity as in C
+
+#Comparison operators
+########<,<=,==,>=,>,!= all return a TRUE/FALSE value
+########string comparison
+################ lt 'less than', le 'less than or equal to', eq 'equal to', ge 'greater than or equal to', gt 'greater than', ne 'not equal'
+########################example: 'fred' lt 'barney' # false
+
+# if control structure
+########looks like C, but the curly braces are required even for only one line of 'then' code
+#=============
+#example
+#=============
+
+#if ($name gt 'fred'){
+#	print "'$name' comes after 'fred' in sorted order.\n";
+#} else {
+#	print "'$name' does not come after 'fred'.\n";
+#	print "Maybe it's the same string, in fact.\n";
+#}
+#
+
+#Boolean values
+########for numbers 0 is false.  everything else is true
+########for strings, "" is false, every other string is true except for '0' which is false
+########only use numbers and strings
+######## $is_bigger = $name gt 'fred'; if ($is_bigger) {...} or if (! $is_bigger) {...}
+
+#Getting user input
+########the simplest way to get input is to use <STDIN>
+################when <STDIN> is used when a scalar is expected, perl reads the next complete text line from standard in, using that string as the value
+################usually puts the \n on the end of it
+########################use chomp to get rid of the newline
+################<STDIN>can return undef if it hits end of file
+
+#the chomp operator
+########gets rid of newline ($text = <STDIN>; chomp($text); or chomp($text = <STDIN>);)
+########can be used with or without the parentheses ($food = <STDIN>; $betty = chomp $food; -> also returns a value on completion [$betty == 1])
+########chomp only removes 1 newline, even if the line ends with 2 newlines, and removes nothing if they're is no newline
+
+# while control structure
+########looks like C again, but curly braces are required again
+#===========
+#example
+#===========
+
+#while ($count < 10){
+#	$count += 2;
+#	print "count is now $count\n";
+#}
+
+#the undef value
+########if a variable isn't initialized yet, it holds undef
+########acts like 0 or an empty string
+################it isn't a number or a string
+########many operators return undef when arguments are out of range or don't make sense
+########you can assign under ($va4 = undef;)
+
+#the defined function
+########checks a value to see if it's undef instead of just an empty string
+########returns false for undef, and true for everything else ($madonna = <STDIN>; if (defined($madonna)){...}
+
+################################################################################################################
+################################################################################################################
+################################################################################################################
+#exercises
+################################################################################################################
+################################################################################################################
+
+#exercise 1
+print("1.Write a program that computes the circumference of a circle with radius of 12.5.\n");
+
+print("\nThe circumference of a circle with radius of 12.5 is ", 12.5*2*3.141592654, " units.\n");
+
+print("exercise 2: modify the program to prompt for and accept a radius from the person running the program.\n\n");
+
+print("Enter a radius for the circle:");
+ while ($radius = <STDIN>){
+	chomp($radius);
+	if ($radius >= 0){
+		print("The circumference of a circle with radius of $radius is ", $radius*2*3.141592654, " units.\n");
+		last;
+	}
+	else{
+		print("You entered invalid data.");
+	}	
+	
+}	
+
+print("\n\nExercise 3: Modify the previous program so that if the user enters a number less than zero, the reported circumference will be zero.\n");
+
+print("\nYou already did that when you wrote the first program. My bad.\n");
+
+print("\nExercise 4: Write a program that promts for and reads two numbers on separate lines of input and prints out the product of the two numbers.\n");
+
+
+
+print("\nEnter the first number:");
+while($varone = <STDIN>){
+	if ($varone eq "\n"){
+		print("You didn't enter a value.");
+	}
+	else {
+		last;
+	}
+}
+
+print("\nEnter the second number:");
+while($vartwo = <STDIN>){
+	if ($vartwo eq "\n"){
+		print("You didn't enter a value.");
+	}
+	else {
+		last;
+	}
+}
+
+print("The product of $varone and $vartwo is ", $varone * $vartwo, " .\n");
+
+#example
+print("Exercise 5:\tWrite a program that prompts for and reads a string and a number (on separate lines of input) and prints out the string the number of times indicated by the number on separate lines.\n\n");\
+print("Type a word or a sentence or some arbitrary characters of your choosing.");
+chomp($s = <STDIN>);
+print("\nType a number greater than zero.  It can be of any magnitude, but the greater it is the longer this program outputs to standard out.  Don't be stupid.\n");
+while(true){
+	chomp($num = <STDIN>);
+	if ($num >= 0){
+		last;
+	}
+}
+print("Here's the output:\n");
+print $s x $num;
+
