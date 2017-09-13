@@ -10,8 +10,8 @@ POSITION_INDEPENDENT=-fPIC
 UNITY_MAJOR=2
 UNITY_MINOR=4
 UNITY_RELEASE=1
-UNITY_REALNAME=$(UNITY_SONAME).$(UNITY_MINOR).$(UNITY_RELEASE)
 UNITY_SONAME=libunitytest.so.$(UNITY_MAJOR)
+UNITY_REALNAME=$(UNITY_SONAME).$(UNITY_MINOR).$(UNITY_RELEASE)
 LIB_DIR=/usr/local/lib/
 LIB_INSTALL=ldconfig
 
@@ -31,7 +31,7 @@ HELLO_WORLD_TEST_RUNNER: hello_world.h hello_world_test_runner.c
 	$(CC) $(ONLY_COMPILE) hello_world_test_runner.c $(INCLUDE_DIRECTORY) $(UNITY_FIXTURE_SOURCE_PATH) $(INCLUDE_DIRECTORY) $(UNITY_SOURCE_PATH)
 
 test_hello: HELLO_WORLD HELLO_WORLD_TEST_RUNNER
-	$(CC) $(OUTPUT_AS) hello_world_test  hello_world_test_runner.o -lunitytest $(ERROR_FLAGS)
+	$(CC) $(OUTPUT_AS) hello_world_test  hello_world_test_runner.o hello_world.o  -lunitytest $(ERROR_FLAGS)
 	./hello_world_test
 
 main: main.c
