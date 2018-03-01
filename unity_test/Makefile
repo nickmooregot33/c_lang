@@ -41,9 +41,11 @@ library:
 	mkdir -p ~/dev/include
 	cp $(UNITY_SOURCE_PATH)/*.h $(INCLUDES)
 	cp $(UNITY_FIXTURE_SOURCE_PATH)/*.h $(INCLUDES)
-	sudo mv $(UNITY_REALNAME) $(LIB_DIR)
-	sudo $(LIB_INSTALL) -n $(LIB_DIR)
-	sudo ln -s -T $(LIB_DIR)$(UNITY_SONAME) $(LIB_DIR)$(UNITY_LINKER_NAME) 
+	mv $(UNITY_REALNAME) $(LIB_DIR)
+	$(LIB_INSTALL) -n $(LIB_DIR)
+	ln -s -T $(LIB_DIR)$(UNITY_SONAME) $(LIB_DIR)$(UNITY_LINKER_NAME) 
+	$(LIB_INSTALL) -i
+	
 
 .PHONY: clean test test_hello all
 	
